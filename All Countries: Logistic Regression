@@ -1,0 +1,226 @@
+### LOGISTIC REGRESSION, ROUND 1
+
+## Round 1, model 1
+#Importing dataset from excel
+Trade_ <- read_excel("~/Desktop/Trade % for analysis.xlsx", 
+                      col_types = c("text", "numeric", 
+                                           "numeric", "numeric", "numeric", 
+                                           "numeric", "numeric"))
+
+#Changing the column names
+colnames(Trade_) <- c(
+     "country",
+     "year",
+     "conflict",
+     "trade",
+     "dem",
+     "pop",
+     "gdp")
+     
+#Removing outliers
+outliers1 <- boxplot(Trade_$trade, plot=FALSE)$out
+ x_trade<-Trade_
+ x_trade<- x_trade[-which(x_trade$trade %in% outliers1),]
+
+#Removing NA values
+x_trade <- x_trade[!(is.na(x_trade$trade)),]
+
+#Removing variables not important for the regression analysis 
+x_trade1 = subset(x_trade, select=-(country))
+x_trade2 = subset(x_trade1, select=-(year))
+
+#Running the regression
+logistic1 <- glm(formula = conflict ~ ., family = "binomial", data = x_trade2)
+
+#Returning the regression results
+summary(logistic1)
+
+## Round 1, model 2
+Net_trade <- read_excel("~/Desktop/Net trade for analysis.xlsx", 
+                                  col_types = c("text", "numeric", 
+         "numeric", "numeric", "numeric", 
+         "numeric", "numeric"))
+
+colnames(Net_trade) <- c(
+     "country",
+     "year",
+     "net_trade",
+     "conflict",
+     "dem",
+     "pop",
+     "gdp")
+
+
+
+x_net <- Net_trade[!(is.na(Net_trade$net_trade)),]
+outliers2 <- boxplot(x_net$net_trade, plot=FALSE)$out
+ x_net<- x_net[-which(x_net$net_trade %in% outliers2),]
+
+x_net_1 = subset(x_net, select=-(country))
+x_net_2 = subset(x_net_1, select=-(year))
+
+logistic2 <- glm(formula = conflict ~ ., family = "binomial", data = x_net_2)
+
+summary(logistic2)
+
+## Round 1, model 3
+
+EV <- read_excel("~/Desktop/Export value analysis.xlsx", 
+                                  col_types = c("text", "numeric", 
+         "numeric", "numeric", "numeric", 
+         "numeric", "numeric"))
+
+colnames(EV) <- c(
+     "country",
+     "year",
+     "EV",
+     "conflict",
+     "dem",
+     "pop",
+     "gdp")
+
+x_EV <- EV[!(is.na(EV$EV)),]
+outliers3 <- boxplot(x_EV$EV, plot=FALSE)$out
+ x_EV<- x_EV[-which(x_EV$EV %in% outliers3),]
+
+
+x_EV_1 = subset(x_EV, select=-(country))
+x_EV_2 = subset(x_EV_2, select=-(year))
+
+logistic3 <- glm(formula = conflict ~ ., family = "binomial", data = x_EV_2)
+
+summary(logistic3)
+
+## Round 1, model 4
+
+IV <- read_excel("~/Desktop/Import value analysis.xlsx", 
+                                  col_types = c("text", "numeric", 
+         "numeric", "numeric", "numeric", 
+         "numeric", "numeric"))
+
+colnames(IV) <- c(
+     "country",
+     "year",
+     "IV",
+     "conflict",
+     "dem",
+     "pop",
+     "gdp")
+
+x_IV <- IV[!(is.na(IV$IV)),]
+outliers4 <- boxplot(x_IV$IV, plot=FALSE)$out
+ x_IV<- x_IV[-which(x_IV$EÍV %in% outliers4),]
+
+x_IV_1 = subset(x_IV, select=-(country))
+x_IV_2 = subset(x_IV_1, select=-(year))
+
+logistic4 <- glm(formula = conflict ~ ., family = "binomial", data = x_IV_2)
+
+summary(logistic4)
+
+### LOGISTIC REGRESSION, ROUND 2
+
+## Round 2, model 1
+Trade_abs <- read_excel("~/Desktop/Trade Abs for analysis.xlsx", 
+                      col_types = c("text", "numeric", 
+                                           "numeric", "numeric", "numeric", 
+                                           "numeric", "numeric"))
+
+colnames(Trade_abs) <- c(
+     "country",
+     "year",
+     "conflict",
+     "abs",
+     "dem",
+     "pop",
+     "gdp")
+     
+x_trade_abs <- Trade_abs[!(is.na(Trade_abs$abs)),]
+outliers5 <- boxplot(x_trade_abs$abs, plot=FALSE)$out
+ x_trade_abs <- x_trade_abs[-which(x_trade_abs$abs %in% outliers5),]
+
+x_trade_abs1 = subset(x_trade_abs, select=-(country))
+x_trade_abs2 = subset(x_trade_abs1, select=-(year))
+
+logistic5 <- glm(formula = conflict ~ ., family = "binomial", data = x_trade_abs2)
+
+summary(logistic5)
+
+## Round 2, model 2
+Net_abs <- read_excel("~/Desktop/Net Trade Abs for analysis.xlsx", 
+                      col_types = c("text", "numeric", 
+                                           "numeric", "numeric", "numeric", 
+                                           "numeric", "numeric"))
+
+colnames(Net_abs) <- c(
+     "country",
+     "year",
+     "conflict",
+     "abs",
+     "dem",
+     "pop",
+     "gdp")
+     
+x_net_abs <- Net_abs[!(is.na(Net_abs$abs)),]
+outliers6 <- boxplot(x_net_abs$abs, plot=FALSE)$out
+ x_net_abs <- x_net_abs[-which(x_net_abs$abs %in% outliers6),]
+
+x_net_abs1 = subset(x_net_abs, select=-(country))
+x_net_abs2 = subset(x_net_abs1, select=-(year))
+
+logistic6 <- glm(formula = conflict ~ ., family = "binomial", data = x_net_abs2)
+
+summary(logistic6)
+
+## Round 2, model 3
+EV_abs <- read_excel("~/Desktop/Export Value Abs for analysis.xlsx", 
+                      col_types = c("text", "numeric", 
+                                           "numeric", "numeric", "numeric", 
+                                           "numeric", "numeric"))
+
+colnames(EV_abs) <- c(
+     "country",
+     "year",
+     "conflict",
+     "abs",
+     "dem",
+     "pop",
+     "gdp")
+     
+x_EV_abs <- EV_abs[!(is.na(EV_abs$abs)),]
+outliers7 <- boxplot(x_EV_abs$abs, plot=FALSE)$out
+ x_EV_abs <- x_EV_abs[-which(x_EV_abs$abs %in% outliers7),]
+
+x_EV_abs1 = subset(x_EV_abs, select=-(country))
+x_EV_abs2 = subset(x_EV_abs1, select=-(year))
+
+logistic7 <- glm(formula = conflict ~ ., family = "binomial", data = x_EV_abs2)
+
+summary(logistic7)
+
+# Round 2, model 4
+IV_abs <- read_excel("~/Desktop/Import Value Abs for analysis.xlsx", 
+                      col_types = c("text", "numeric", 
+                                           "numeric", "numeric", "numeric", 
+                                           "numeric", "numeric"))
+
+#Changing the column names
+colnames(IV_abs) <- c(
+     "country",
+     "year",
+     "conflict",
+     "abs",
+     "dem",
+     "pop",
+     "gdp")
+     
+x_IV_abs <- IV_abs[!(is.na(EIV_abs$abs)),]
+outliers8 <- boxplot(x_IV_abs$abs, plot=FALSE)$out
+ x_IV_abs <- x_IV_abs[-which(x_IV_abs$abs %in% outliers8),]
+
+x_IV_abs1 = subset(x_IV_abs, select=-(country))
+x_IV_abs2 = subset(x_IV_abs1, select=-(year))
+
+logistic8 <- glm(formula = conflict ~ ., family = "binomial", data = x_IV_abs2)
+
+summary(logistic8)
